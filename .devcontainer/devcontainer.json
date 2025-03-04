@@ -1,0 +1,63 @@
+{
+  "name": "WordPress Development",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+  "features": {
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {},
+    "ghcr.io/devcontainers/features/github-cli:1": {}
+  },
+  "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+  "forwardPorts": [
+    8080
+  ],
+  "portsAttributes": {
+    "8080": {
+      "visibility": "private"
+    }
+  },
+  "postCreateCommand": "docker-compose -f .devcontainer/docker-compose.yml up -d && bash .devcontainer/setup-wordpress.sh && bash .devcontainer/git-config.sh",
+  "postStartCommand": "bash .devcontainer/startup.sh",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "spencerwmiles.vscode-task-buttons"
+      ],
+      "settings": {
+        "VsCodeTaskButtons.showCounter": true,
+        "VsCodeTaskButtons.position": "statusbar",
+        "VsCodeTaskButtons.refreshOnStart": true,
+        "VsCodeTaskButtons.tasks": [
+          {
+            "label": "$(globe) WP Home",
+            "task": "WP Homepage",
+            "tooltip": "Open the WordPress homepage in the browser",
+            "dependsOn": []
+          },
+          {
+            "label": "$(lock) WP Admin",
+            "task": "WP Admin",
+            "tooltip": "Open the WordPress admin login page in the browser",
+            "dependsOn": []
+          },
+          {
+            "label": "$(key) PW Reset",
+            "task": "PW Reset",
+            "tooltip": "Reset the WordPress admin password to password123",
+            "dependsOn": []
+          },
+          {
+            "label": "$(refresh) WP Restart",
+            "task": "WP Restart",
+            "tooltip": "Restart WordPress services and ensure port is private",
+            "dependsOn": []
+          },
+          {
+            "label": "$(repo-push) Save to Github",
+            "task": "Save to Github",
+            "tooltip": "Commit and push changes to GitHub",
+            "dependsOn": []
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "WP Homepage",
+      "type": "shell",
+      "command": "URL=$(.devcontainer/open-url.sh home) && echo \"Opening: $URL\" && code --openExternal \"$URL\"",
+      "presentation": {
+        "reveal": "never",
+        "panel": "dedicated",
+        "showReuseMessage": false,
+        "clear": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "WP Admin",
+      "type": "shell",
+      "command": "URL=$(.devcontainer/open-url.sh admin) && echo \"Opening: $URL\" && code --openExternal \"$URL\"",
+      "presentation": {
+        "reveal": "never",
+        "panel": "dedicated",
+        "showReuseMessage": false,
+        "clear": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "PW Reset",
+      "type": "shell",
+      "command": "bash -c '.devcontainer/reset-admin-password.sh'",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "showReuseMessage": false,
+        "clear": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "WP Restart",
+      "type": "shell",
+      "command": "bash -c '.devcontainer/startup.sh'",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "showReuseMessage": false,
+        "clear": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Save to Github",
+      "type": "shell",
+      "command": "if [[ -n $(git status --porcelain) ]]; then echo 'Uncommitted changes found'; read -p 'Enter submission comments: ' comments; git add .; git commit -m \"$comments\"; if git push; then echo 'Successfully pushed changes'; else echo 'Push failed. Attempting force push...'; read -p 'Force push may overwrite remote changes. Continue? (y/n): ' confirm; if [[ $confirm == 'y' ]]; then git push --force; echo 'Force push complete'; else echo 'Push cancelled'; fi; fi; else echo 'No changes to commit'; fi",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "showReuseMessage": false,
+        "clear": true
+      },
+      "problemMatcher": []
+    }
+  ]
+}
